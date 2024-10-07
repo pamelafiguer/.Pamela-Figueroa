@@ -16,14 +16,14 @@ cursor = cnx.cursor(dictionary=True)
 @app.route('/')
 @app.route('/index')
 def index():
-    return render_template("index.html")
+   return render_template("index.html")
 
 @app.route("/cines")
 def cines():
-    cursor.callproc("sp_getCines")
-    for row in cursor.stored_results():
-        cines = row.fetchall()
-    return render_template ("cines.html", cine = cines)
+   cursor.callproc("sp_getCines")
+   for row in cursor.stored_results():
+         cines = row.fetchall()
+   return render_template ("cines.html", cines = cines, id = id)
 
 
 
@@ -33,15 +33,14 @@ def cine(id):
    for data in cursor.stored_results():
       tarifas = data.fetchall()
    
-   cursor.callproc('sp_getCinePeliculas', (id, ))
    for data in cursor.stored_results():
-      horarios = data.fetchall()
+      Horarios = data.fetchall()
    
    cursor.callproc('sp_getCine', (id, ))
    for data in cursor.stored_results():
       cines = data.fetchall()
    
-   return render_template('cine.html', tarifas=tarifas, horarios=horarios, cines=cines, id=id)
+   return render_template('cine.html', tarifas=tarifas, Horarios=Horarios, cines=cines, id=id)
 
 
 
@@ -53,19 +52,19 @@ def peliculas(id):
       return render_template('index.html')
    
    if id == 1:
-         cursor.callproc('sp_getPeliculass')
+         cursor.callproc('sp_getPeliculas', (id, ))
          for data in cursor.stored_results():
             peliculas = data.fetchall()
          return render_template('peliculas.html', peliculas = peliculas)
    if id == 2:
-         cursor.callproc('sp_getPeliculasEstrenoss')
+         cursor.callproc('sp_getPeliculas', (id, ))
          for data in cursor.stored_results():
-            estrenos = data.fetchall()
-         return render_template('estrenos.html', estrenos = estrenos)
+            peliculas = data.fetchall()
+         return render_template('peliculas.html', peliculas = peliculas)
 
 @app.route('/pelicula/<int:id>')
 def pelicula(id):
-   #cursor.execute("select * from pelicula where id = %s", (id,))
+   
    cursor.callproc('sp_getPelicula',(id, ))
    for data in cursor.stored_results(): 
       pelicula = data.fetchall()
@@ -74,6 +73,4 @@ def pelicula(id):
    
 
 if __name__ == "__main__" :
-    app.run(debug=True)
-    
-    
+   app.run(debug=True)

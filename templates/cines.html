@@ -3,10 +3,9 @@
 
 {% block contenido_interno %}
 	
-
-	
 				<br/><h1>Nuestros Cines</h1><br/>
-				{% for cine in cines %}
+				
+{% for cine in cines %}
                 <div class="contenido-cine">
 		
 	                <img src="{{ url_for('static', filename ='img/cine/' + cine.id|string + '.1.jpg') }}" width="227" height="170"/>

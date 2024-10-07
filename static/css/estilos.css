@@ -7,7 +7,8 @@ h1, h2, h3, h4, h5, h6, pre, code { font-size: 1em; }
 
 a img, :link img, :visited img { border: none; }
 
-a:link, a:visited { }
+
+
 
 * {
     box-sizing: border-box;
@@ -404,6 +405,3 @@ ul.menu-principal li a:hover {
     margin-right: -4px;
 }
 
-.celda-cabecera .pelicula {
-    
-}
